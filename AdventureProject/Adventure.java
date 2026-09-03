@@ -1,3 +1,4 @@
+// attempted callback, locked door, compound gate, and de morgan
 import java.util.Scanner;
 
 public class Adventure {
@@ -61,12 +62,14 @@ public class Adventure {
             if (choice == 1 && !isAwake) {
                 isAwake = true;
                 playScene(42);
-            } else if (choice == 1 && isAwake) {
-                System.out.println("And... you're back.");
-                playScene(42);
             } else {
-                wastedTime = true;
-                playScene(41);
+                if (choice == 1 && isAwake) {
+                    System.out.println("And... you're back.");
+                    playScene(42);
+                } else {
+                    wastedTime = true;
+                    playScene(41);
+                }
             }
         } else if (sceneNum == 41) {
             System.out.println("You take off your clothes and run around naked. But you're in your bedroom, and you just wasted 15 minutes. You get tired of running and start your morning routine.");
