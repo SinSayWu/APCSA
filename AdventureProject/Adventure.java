@@ -1,10 +1,11 @@
 import java.util.Scanner;
 
 public class Adventure {
-    private static boolean hasStudied;
-    private static boolean wastedTime;
-    private static boolean arjunAnnoyed;
-    private static int choice;
+    private static boolean hasStudied = false;
+    private static boolean wastedTime = false;
+    private static boolean arjunAnnoyed = false;
+    private static boolean isAwake = false;
+    private static int choice = 1;
 
     public static void playScene(int sceneNum) {
         Scanner input = new Scanner(System.in);
@@ -47,7 +48,11 @@ public class Adventure {
             // WAKE
             System.out.println("You wake up. You realize that you do, indeed, have a Biology test. Thankfully, you now have a whole day to study. What do you do?\n1. Get up from bed and do your standard morning routine\n2. Take off your clothes and run around naked.");
             choice = input.nextInt();
-            if (choice == 1) {
+            if (choice == 1 && !isAwake) {
+                isAwake = true;
+                playScene(42);
+            } else if (choice == 1 && isAwake) {
+                System.out.println("And... you're back.");
                 playScene(42);
             } else {
                 wastedTime = true;
@@ -106,40 +111,141 @@ public class Adventure {
             }
         } else if (sceneNum == 46){
             // CONRAD FLEX
-            System.out.println("Mr. Conrad glares at you. For the entire flex time. You do not get anything done. It is lunchtime.");
-            playScene(48);
+            System.out.println("Mr. Conrad glares at you. For the entire flex time. You do not get anything done. It is lunchtime.\n1. Go to lunch\n2. Skip lunch");
+            if (choice == 1) {
+                playScene(48);
+            } else {
+                playScene(49);
+            }
         } else if (sceneNum == 47){
             // SKIP CONRAD
-            System.out.println("Mr. Dennis glares at you. He is angry that you did not do your CSA work. You have to make it all up during flex. You do not get to study for Biology.");
-            playScene(48);
+            System.out.println("Mr. Dennis glares at you. He is angry that you did not do your CSA work. You have to make it all up during flex. You do not get to study for Biology.\n1. Go to lunch\n2. Skip lunch");
+            if (choice == 1) {
+                playScene(48);
+            } else {
+                playScene(50);
+            }
         } else if (sceneNum == 48){
             // LUNCH
             if (arjunAnnoyed) {
                 System.out.println("Arjun glares at you. He is still annoyed as dingle. You try to study for biology, but he throws food at you the entire time. You can't focus at all.");
             } else {
-                System.out.println("")
+                System.out.println("You study and eat quietly. Yuhang, being a supportive friend, encourages you and helps you review.");
             }
         } else if (sceneNum == 49){
-
+            // CONRAD NO LUNCH
+            if (arjunAnnoyed) {
+                System.out.println("You hear screaming downstairs. You recognize its Arjun's voice.");
+            } else {
+                System.out.println("You study productively for 30 minutes. Mr. Conrad is impressed by your determination.");
+            }
+            System.out.println("Go to third period?");
+            input.nextLine();
+            input.nextLine();
+            playScene(51);
         } else if (sceneNum == 50){
-
+            // DENNIS NO LUNCH
+            if (arjunAnnoyed) {
+                System.out.println("You hear screaming downstairs. You recognize its Arjun's voice.");
+            } else {
+                System.out.println("You study productively for 30 minutes. Mr. Dennis tries to help you, but doesn't know biology.");
+            }
+            System.out.println("Go to third period?");
+            input.nextLine();
+            input.nextLine();
+            playScene(51);
         } else if (sceneNum == 51){
-
+            // THIRD PERIOD OOOH
+            System.out.println("AP Biology. Mr. Conrad gives the class a mean smile.\n\"There may be some *fun* questions on this test.\"\n\"Also, I am calling in one of my best students, the highest GPA to grace these halls, to grade your FRQs.\"\nStart the test?\n1. Yes\n2. Yes");
+            input.nextInt();
+            // ALL OF THESE ENDINGS ARE LOCKED DOORS
+            if (hasStudied && wastedTime && arjunAnnoyed) playScene(52);
+            else if (hasStudied && wastedTime && !arjunAnnoyed) playScene(53);
+            else if (hasStudied && !wastedTime && arjunAnnoyed) playScene(54);
+            else if (hasStudied && !wastedTime && !arjunAnnoyed) playScene(55);
+            // DEMORGAN
+            // else if (hasStudied && !(wastedTime || arjunAnnoyed)) playScene(55);
+            else if (!hasStudied && wastedTime && arjunAnnoyed) playScene(56);
+            else if (!hasStudied && wastedTime && !arjunAnnoyed) playScene(57);
+            else if (!hasStudied && !wastedTime && arjunAnnoyed) playScene(58);
+            else if (!hasStudied && !wastedTime && !arjunAnnoyed) playScene(59);
         } else if (sceneNum == 52){
-
+            // STUDIED WASTED TIME ARJUN ANNOYED
+            // CALLBACK
+            System.out.println("You look at the questions, realizing that you actually know how to do them.\nBut, you realized that you forgot to review lipids due to you wasting time running around naked this morning. Lipids are a fifth of the test and you don't know anything about it.\nWhen you hit the FRQs, a sudden realization hits you. Maybe you shouldn't have annoyed Arjun all those hours ago. He will most definitely unfairly grade your FRQ. Oh no.\n1. Turn in your test\n2. Take off your clothes and run around naked.");
+            choice = input.nextInt();
+            if (choice == 1) {
+                System.out.println("You got an 80 on the multiple choice section and a 0 on the FRQ section. You got a 40 on the test. You failed miserably.\nCongratulations! You obtained the 'annoyed, wasted, and failed' ending!");
+            } else {
+                playScene(40);
+            }
         } else if (sceneNum == 53){
+            // STUDIED WASTED TIME ARJUN GOOD
+            System.out.println("You look at the questions, realizing that you actually know how to do them.\nBut, you realized that you forgot to review lipids due to you wasting time running around naked this morning. Lipids are a fifth of the test and you don't know anything about it.\nWhen you hit the FRQs, a sudden realization hits you. You feel glad that you didn't annoy Arjun all those hours ago. He will most definitely give you a free 100 on that section. Yay!\n1. Turn in your test\n2. Take off your clothes and run around naked.");
 
+            if (choice == 1) {
+                System.out.println("You got an 80 on the multiple choice section and a 100 on the FRQ section. You got a 90 on the test. You passed without flying colors.\nCongratulations! You obtained the 'passed but not good' ending!");
+            } else {
+                playScene(40);
+            }
         } else if (sceneNum == 54){
+            // STUDIED DIDNT WASTE TIME ARJUN ANNOYED
+            System.out.println("You look at the questions, realizing that you actually know how to do them.\nYou also realized that you reviewed lipids in the time you could have been spending running around naked this morning.\nWhen you hit the FRQs, a sudden realization hits you. Maybe you shouldn't have annoyed Arjun all those hours ago. He will most definitely unfairly grade your FRQ. Oh no.\n1. Turn in your test\n2. Take off your clothes and run around naked.");
 
+            if (choice == 1) {
+                System.out.println("You got a 100 on the multiple choice section and a 0 on the FRQ section. You got a 50 on the test. You failed not-so-miserably!\nCongratulations! You obtained the 'half-and-half' ending!");
+            } else {
+                playScene(40);
+            }
         } else if (sceneNum == 55){
+            // STUDIED DIDNT WASTE TIME ARJUN GOOD
+            System.out.println("You look at the questions, realizing that you actually know how to do them.\nYou also realized that you reviewed lipids in the time you could have been spending running around naked this morning.\nWhen you hit the FRQs, a sudden realization hits you. You feel glad that you didn't annoy Arjun all those hours ago. He will most definitely give you a free 100 on that section. Yay!\n1. Turn in your test\n2. Take off your clothes and run around naked.");
 
+            if (choice == 1) {
+                System.out.println("You got a 100 on the multiple choice section and a 100 on the FRQ section. You got a 100 on the test. You passed with flying colors!\nCongratulations! You obtained the 'perfect score' ending!");
+            } else {
+                playScene(40);
+            }
         } else if (sceneNum == 56){
+            // DIDNT STUDY WASTE TIME ARJUN ANNOYED
+            System.out.println("You look at the questions. You have no clue how to do them.\nYou feel that as you would have failed anyway, you are glad to have explored your nature this morning.\nWhen you hit the FRQs, a sudden realization hits you. Maybe you shouldn't have annoyed Arjun all those hours ago. He will most definitely unfairly grade your FRQ. Oh no.\n1. Turn in your test\n2. Take off your clothes and run around naked.");
 
+            if (choice == 1) {
+                System.out.println("You got a 0 on the multiple choice section and a 0 on the FRQ section. You got a 0 on the test. You are sad about your score, but am still partially glad about this morning.\nCongratulations! You obtained the 'perfect 0' ending!");
+            } else {
+                playScene(40);
+            }
         } else if (sceneNum == 57){
+            // DIDNT STUDY WASTE TIME ARJUN GOOD
+            System.out.println("You look at the questions. You have no clue how to do them.\nYou feel that as you would have failed anyway, you are glad to have explored your nature this morning.\nWhen you hit the FRQs, a sudden realization hits you. You feel glad that you didn't annoy Arjun all those hours ago. He will most definitely give you a free 100 on that section. Yay!\n1. Turn in your test\n2. Take off your clothes and run around naked.");
 
+            if (choice == 1) {
+                System.out.println("You got a 0 on the multiple choice section and a 100 on the FRQ section. You got a 50 on the test. Mr. Conrad is extremely suspicious, and starts investigating both you and Arjun. Both of you were caught for cheating and expelled. Yuhang is sad.\nCongratulations! You obtained the 'expelled' ending!");
+            } else {
+                playScene(40);
+            }
         } else if (sceneNum == 58){
+            // DIDNT STUDY DIDNT WASTE TIME ARJUN ANNOYED
+            System.out.println("You look at the questions. You have no clue how to do them.\nYou feel that as you would have failed anyway, you are sad you didn't run around naked this morning. You realize that you have a chance to correct that now.\nWhen you hit the FRQs, a sudden realization hits you. Maybe you shouldn't have annoyed Arjun all those hours ago. He will most definitely unfairly grade your FRQ. Oh no.\n1. Turn in your test\n2. Take off your clothes and run around naked.");
 
+            if (choice == 1) {
+                System.out.println("You got a 0 on the multiple choice section and a 0 on the FRQ section. You got a 0 on the test. You are sad about your score.\nCongratulations! You obtained the 'perfect 0 but not naked' ending!");
+            } else {
+                playScene(40);
+            }
+        } else if (sceneNum == 59){
+            // DIDNT STUDY DIDNT WASTE TIME ARJUN GOOD
+            System.out.println("You look at the questions. You have no clue how to do them.\nYou feel that as you would have failed anyway, you are sad you didn't run around naked this morning. You realize that you have a chance to correct that now.\nWhen you hit the FRQs, a sudden realization hits you. You feel glad that you didn't annoy Arjun all those hours ago. He will most definitely give you a free 100 on that section. Yay!\n1. Turn in your test\n2. Take off your clothes and run around naked.");
+
+            if (choice == 1) {
+                System.out.println("You got a 0 on the multiple choice section and a 100 on the FRQ section. You got a 50 on the test. Mr. Conrad is extremely suspicious, and starts investigating both you and Arjun. Both of you were caught for cheating and expelled. Yuhang is sad.\nCongratulations! You obtained the 'expelled but not naked' ending!");
+            } else {
+                playScene(40);
+            }
+        } else {
+            System.out.println("Congratulations! You have escaped the simulation! This is the final secret ending, obtained by finding a bug in my code or logic chain.");
         }
+        input.close();
     }
 
     public static void main(String[] args) {
