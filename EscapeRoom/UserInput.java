@@ -6,8 +6,7 @@
  */
 import java.util.Scanner;
 
- public class UserInput
-{
+public class UserInput {
     /**
      * Verifies that one of the string array provided as an argument will be
      * returned. 
@@ -24,12 +23,10 @@ import java.util.Scanner;
      * @return the valid command the user entered
      * 
      */
-    public static String getValidInput(String[] validInputs)
-    {
+    public static String getValidInput(String[] validInputs) {
         String input = "";
         boolean valid = false;
-        do
-        {
+        do {
             input = getLine().toLowerCase();
             for(String str : validInputs)
             {
@@ -43,11 +40,8 @@ import java.util.Scanner;
         return input;
     }
     
-    public static String getLine()
-    {
+    public static String getLine() {
         Scanner s = new Scanner(System.in);
         return s.nextLine();
     }
-
-
-  }
+}

@@ -19,8 +19,7 @@ import java.util.Random;
  * @author PLTW
  * @version 1.0
  */
-public class GameGUI extends JComponent
-{
+public class GameGUI extends JComponent {
   static final long serialVersionUID = 141L; // problem 1.4.1
 
   private static final int WIDTH = 510;
@@ -66,8 +65,7 @@ public class GameGUI extends JComponent
    * Constructor for the GameGUI class.
    * Creates a frame with a background image and a player that will move around the board.
    */
-  public GameGUI()
-  {
+  public GameGUI() {
     
     try {
       bgImage = ImageIO.read(new File("grid.png"));      
@@ -108,8 +106,7 @@ public class GameGUI extends JComponent
   * After a GameGUI object is created, this method adds the walls, prizes, and traps to the gameboard.
   * Note that traps and prizes may occupy the same location.
   */
-  public void createBoard()
-  {
+  public void createBoard() {
     traps = new Rectangle[totalTraps];
     createTraps();
     
@@ -132,8 +129,7 @@ public class GameGUI extends JComponent
    * @param incry amount to move player in y direction
    * @return penalty score for hitting a wall or potentially going off the grid, 0 otherwise
    */
-  public int movePlayer(int incrx, int incry)
-  {
+  public int movePlayer(int incrx, int incry) {
       int newX = x + incrx;
       int newY = y + incry;
       
@@ -148,8 +144,7 @@ public class GameGUI extends JComponent
       }
 
       // determine if a wall is in the way
-      for (Rectangle r: walls)
-      {
+      for (Rectangle r: walls) {
         // this rect. location
         int startX =  (int)r.getX();
         int endX  =  (int)r.getX() + (int)r.getWidth();
