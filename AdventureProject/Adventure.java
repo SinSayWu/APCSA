@@ -6,9 +6,9 @@ public class Adventure {
     private static boolean arjunAnnoyed = false;
     private static boolean isAwake = false;
     private static int choice = 1;
+    private static final Scanner input = new Scanner(System.in);
 
     public static void playScene(int sceneNum) {
-        Scanner input = new Scanner(System.in);
         if (sceneNum == 1) {
             // BEGINNING SCENE
             System.out.println("Your name is Aiden.\nIt is the end of lunch. You remember that you have a Biology test in 5 minutes, and you have not studied. What do you do?\n1. Study for 5 minutes.\n2. Take off your clothes and run around naked.");
@@ -95,6 +95,7 @@ public class Adventure {
         } else if (sceneNum == 44) {
             // STUDYING IN CSA
             System.out.println("You study quietly in the corner. CSA passes without commotion. You realize that you have Mr. Conrad for flex time.\n1. Go to Conrad\n2. Skip Conrad and stay at Dennis");
+            choice = input.nextInt();
             if (choice == 1) {
                 playScene(46);
             } else {
@@ -104,6 +105,7 @@ public class Adventure {
             // ANNOYING ARJUN
             System.out.println("The following dialogue takes place:\n\nAiden: morning sunshine\n\nArjun: Hey Aiden. You actually do the array assignment?\n\nAiden: nope. was gonna copy yours. you don't mind right\n\nArjun: ...I kind of do, but okay, I'll walk you through it. It's not that bad once you get the loops down.\n\nAiden: i love when you explain things. so patient. it's attractive honestly\n\nArjun: Please don't. Okay so you initialize the counter at zero--\n\nAiden: zero. mysterious. go on\n\nArjun: --and then you iterate while i is less than the length.\n\nAiden: and THEN what genius. what does the highest gpa to grace these halls do next\n\nArjun: [ignores that] Then you access the element at index i.\n\nAiden: so smart. so wasted on this class. you should be teaching. or modeling\n\nArjun: Can you take literally one thing seriously.\n\nAiden: i take you seriously\n\nArjun: The ASSIGNMENT, Aiden.\n\nAiden: oh the assignment. yeah no i already turned in random characters. figured it'd compile eventually. optimism\n\nArjun: That's not-- that's not how compiling WORKS.\n\nAiden: agree to disagree\n\nArjun: It's not a matter of OPINION. It either compiles or it doesn't. There is a right answer.\n\nAiden: you're cute when you get all rigid about it\n\nArjun: STOP saying that.\n\nAiden: saying what. that there's no right answer? or that you're cute\n\nArjun: I have spent TEN MINUTES trying to help you and you've contributed NOTHING except--\n\nAiden: highest gpa to grace these halls everybody\n\nArjun: I asked you to stop.\n\nAiden: you asked me to stop the OTHER thing. different thing. keep up\n\nArjun: Do you actually want to pass this class or is this a bit. Because I genuinely cannot tell anymore.\n\nAiden: why not both\n\nArjun: Because BOTH doesn't-- you can't just VIBE your way through a for-loop, Aiden, it doesn't run on VIBES--\n\nAiden: mine does\n\nArjun: YOURS DOESN'T RUN AT ALL. That's the WHOLE PROBLEM.\n\nAiden: ok you're kind of hot when you yell\n\nArjun: I am NOT-- I am not doing this with you. I am DONE. Copy someone else's. Copy the wall. I don't CARE anymore. You have wasted my ENTIRE period and I'm sitting here like an IDIOT explaining ITERATION to a brick that keeps calling me CUTE and I'm SO-- I'm SO done, Aiden.\n\nAiden: so is that a yes on modeling\n\nArjun: [stands up] Mr. Dennis? Yeah, hi. Can I move seats.\n\nAiden: whoa\n\nArjun: No, permanently. Anywhere. The floor is fine.\n\nAiden: babe\n\nArjun: [gathering his stuff] Don't. Do not \"babe\" me. I have asked you to stop approximately FORTY times and you have the retention span of a goldfish with a concussion, so I'm removing the variable. That's YOU. You're the variable.\n\nAiden: you're using CS terms for me. that's basically a love letter\n\nArjun: [already walking to the empty desk in the front row] Good luck with the array.\n\nAiden: ...\n\nAiden: ARJUN. arjun come back i'll do the loops. ARJUN.");
             System.out.println("Oops. Arjun's mad now. Oh well. You realize that you have Mr. Conrad for flex time.\n1. Go to Conrad\n2. Skip Conrad and stay at Dennis");
+            choice = input.nextInt();
             if (choice == 1) {
                 playScene(46);
             } else {
@@ -245,10 +247,10 @@ public class Adventure {
         } else {
             System.out.println("Congratulations! You have escaped the simulation! This is the final secret ending, obtained by finding a bug in my code or logic chain.");
         }
-        input.close();
     }
 
     public static void main(String[] args) {
         playScene(1);
+        input.close();
     }
 }
